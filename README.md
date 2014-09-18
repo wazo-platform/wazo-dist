@@ -1,4 +1,4 @@
 xivo-dist
 =========
 
-Tool to manage XiVO repository sources 
+XiVO repository sources manager
