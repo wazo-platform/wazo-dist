@@ -21,7 +21,7 @@ import argparse
 BASE_URI = 'http://mirror.xivo.io/'
 ARCHIVE_URI = BASE_URI + 'archive/'
 DEBIAN_URI = BASE_URI + 'debian/'
-SOURCE_LIST_PATH = '/etc/apt/sources.list.d/xivo.list'
+SOURCE_LIST_PATH = '/etc/apt/sources.list.d/xivo-dist.list'
 NAMED_DISTRIBUTIONS = ['xivo-five', 'xivo-dev', 'xivo-rc']
 
 
