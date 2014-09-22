@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
-from xivo_dist.main import main
+from xivo_dist.xivo_dist import main
 
 
 main()
