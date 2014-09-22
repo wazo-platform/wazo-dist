@@ -23,6 +23,11 @@ ARCHIVE_URI = BASE_URI + 'archive/'
 DEBIAN_URI = BASE_URI + 'debian/'
 SOURCE_LIST_PATH = '/etc/apt/sources.list.d/xivo-dist.list'
 NAMED_DISTRIBUTIONS = ['xivo-five', 'xivo-dev', 'xivo-rc']
+DEB_SOURCE_CONTENT = """
+# {distrib}
+deb {mirror_uri} {distrib} main
+# deb-src {mirror_uri} {distrib} main
+"""
 
 
 def main():
@@ -40,23 +45,17 @@ def parse_args():
 
 def write_source_list(distribution_sources):
     fh = open(SOURCE_LIST_PATH, 'w')
-    for line in distribution_sources:
-        fh.write(line)
+    fh.write(distribution_sources)
     fh.close()
 
 
 def generate_sources(distribution):
-    sources = []
-
     is_archive = distribution_is_archive(distribution)
 
-    uri = ARCHIVE_URI if is_archive else DEBIAN_URI
-    deb_source = "{} {} {} {}\n".format('deb', uri, distribution, 'main')
+    mirror_uri = ARCHIVE_URI if is_archive else DEBIAN_URI
+    deb_source = DEB_SOURCE_CONTENT.format(mirror_uri=mirror_uri, distrib=distribution)
 
-    sources.append("# {}\n".format(distribution))
-    sources.append(deb_source)
-
-    return sources
+    return deb_source
 
 
 def distribution_is_archive(distribution):

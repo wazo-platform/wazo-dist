@@ -15,29 +15,30 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
+import textwrap
 import unittest
 from xivo_dist import xivo_dist
+
+BASE_URI = 'http://mirror.xivo.io/'
+ARCHIVE_URI = BASE_URI + 'archive/'
+DEBIAN_URI = BASE_URI + 'debian/'
 
 
 class TestXivoDist(unittest.TestCase):
 
     def test_given_prod_distribution_when_generate_sources_then_prod_debian_source(self):
         distribution = 'xivo-five'
-        expected_sources_list = ['# {}\n'.format(distribution),
-                                 'deb http://mirror.xivo.io/debian/ {} main\n'.format(distribution)]
 
         sources = xivo_dist.generate_sources(distribution)
 
-        self.assertEqual(sources, expected_sources_list)
+        self._assert_sources(sources, DEBIAN_URI, distribution)
 
     def test_given_unnamed_distribution_when_generate_sources_then_archive_source(self):
         distribution = 'xivo-forever'
-        expected_sources_list = ['# {}\n'.format(distribution),
-                                 'deb http://mirror.xivo.io/archive/ {} main\n'.format(distribution)]
 
         sources = xivo_dist.generate_sources(distribution)
 
-        self.assertEqual(sources, expected_sources_list)
+        self._assert_sources(sources, ARCHIVE_URI, distribution)
 
     def test_given_named_distribution_when_distribution_is_archive_then_false(self):
         distribution = 'xivo-dev'
@@ -52,3 +53,14 @@ class TestXivoDist(unittest.TestCase):
         is_archive = xivo_dist.distribution_is_archive(distribution)
 
         self.assertEqual(is_archive, True)
+
+    def _assert_sources(self, sources, mirror_uri, distribution):
+        expected_sources_pattern = textwrap.dedent("""
+                # {distrib}
+                deb {mirror_uri} {distrib} main
+                # deb-src {mirror_uri} {distrib} main
+                """)
+
+        return self.assertEqual(sources,
+                                expected_sources_pattern.format(mirror_uri=mirror_uri,
+                                                                distrib=distribution))
