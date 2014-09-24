@@ -45,22 +45,20 @@ class TestXivoDist(unittest.TestCase):
 
         is_archive = xivo_dist.distribution_is_archive(distribution)
 
-        self.assertEqual(is_archive, False)
+        self.assertFalse(is_archive)
 
     def test_given_unnamed_distribution_when_distribution_is_archive_then_true(self):
         distribution = 'xivo-ftw'
 
         is_archive = xivo_dist.distribution_is_archive(distribution)
 
-        self.assertEqual(is_archive, True)
+        self.assertTrue(is_archive)
 
     def _assert_sources(self, sources, mirror_uri, distribution):
-        expected_sources_pattern = textwrap.dedent("""
-                # {distrib}
-                deb {mirror_uri} {distrib} main
-                # deb-src {mirror_uri} {distrib} main
-                """)
+        expected_sources = textwrap.dedent("""
+            # {distrib}
+            deb {mirror_uri} {distrib} main
+            # deb-src {mirror_uri} {distrib} main
+        """).format(mirror_uri=mirror_uri, distrib=distribution)
 
-        return self.assertEqual(sources,
-                                expected_sources_pattern.format(mirror_uri=mirror_uri,
-                                                                distrib=distribution))
+        return self.assertEqual(sources, expected_sources)
