@@ -19,14 +19,8 @@
 import fnmatch
 import os
 
-from distutils.core import setup
-
-
-def is_package(path):
-    is_test_module = fnmatch.fnmatch(path, '*tests')
-    return not is_test_module
-
-packages = [p for p, _, _ in os.walk('xivo_dist') if is_package(p)]
+from setuptools import setup
+from setuptools import find_packages
 
 
 setup(
@@ -36,6 +30,6 @@ setup(
     author='Avencall',
     author_email='dev@avencall.com',
     url='https://github.com/xivo-pbx/xivo-dist',
-    packages=packages,
+    packages=find_packages(),
     scripts=['bin/xivo-dist'],
 )
