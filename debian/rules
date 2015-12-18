@@ -1,5 +1,7 @@
 #!/usr/bin/make -f
 # -*- makefile -*-
 
+export DEBPYTHON_SUPPORTED=2.6,2.7
+
 %:
 	dh $@ --with python2

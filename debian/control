@@ -10,7 +10,7 @@ Homepage: http://github.com/xivo-pbx/
 
 Package: xivo-dist
 Architecture: all
-Depends: ${python:Depends}, ${misc:Depends}
+Depends: python (>= 2.6), python (<< 2.8), ${misc:Depends}
 Description: XiVO repository sources manager
  XiVO is a system based on a powerful IPBX, to bring an easy to
  install solution for telephony and related services.
