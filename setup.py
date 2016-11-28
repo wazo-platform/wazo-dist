@@ -29,7 +29,7 @@ setup(
     description='XiVO repository sources manager',
     author='Avencall',
     author_email='dev@avencall.com',
-    url='https://github.com/xivo-pbx/xivo-dist',
+    url='https://github.com/wazo-pbx/xivo-dist',
     packages=find_packages(),
     scripts=['bin/xivo-dist'],
 )
