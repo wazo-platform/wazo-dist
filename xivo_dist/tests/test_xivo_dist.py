@@ -19,7 +19,7 @@ import textwrap
 import unittest
 from xivo_dist import xivo_dist
 
-BASE_URI = 'http://mirror.xivo.io/'
+BASE_URI = 'http://mirror.wazo.community/'
 ARCHIVE_URI = BASE_URI + 'archive/'
 DEBIAN_URI = BASE_URI + 'debian/'
 

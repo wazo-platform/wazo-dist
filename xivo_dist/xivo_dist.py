@@ -18,7 +18,7 @@
 
 import argparse
 
-BASE_URI = 'http://mirror.xivo.io/'
+BASE_URI = 'http://mirror.wazo.community/'
 ARCHIVE_URI = BASE_URI + 'archive/'
 DEBIAN_URI = BASE_URI + 'debian/'
 SOURCE_LIST_PATH = '/etc/apt/sources.list.d/xivo-dist.list'
