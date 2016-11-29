@@ -22,7 +22,7 @@ BASE_URI = 'http://mirror.wazo.community/'
 ARCHIVE_URI = BASE_URI + 'archive/'
 DEBIAN_URI = BASE_URI + 'debian/'
 SOURCE_LIST_PATH = '/etc/apt/sources.list.d/xivo-dist.list'
-NAMED_DISTRIBUTIONS = ['xivo-five', 'xivo-dev', 'xivo-rc']
+NAMED_DISTRIBUTIONS = ['xivo-five', 'xivo-dev', 'xivo-rc', 'wazo-dev', 'wazo-rc', 'phoenix']
 DEB_SOURCE_CONTENT = """
 # {distrib}
 deb {mirror_uri} {distrib} main
