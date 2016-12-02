@@ -10,7 +10,7 @@ case "$1" in
         fi
 
 	if dpkg --compare-versions "$previously_installed_version" "le-nl" "16.16~20161129.155728.5b12d5d"; then
-	    sed 's/xivo\.io/wazo.community/' /etc/apt/sources.list.d/xivo-dist.list || true
+	    sed -i 's/xivo\.io/wazo.community/' /etc/apt/sources.list.d/xivo-dist.list || true
         fi
     ;;
 
