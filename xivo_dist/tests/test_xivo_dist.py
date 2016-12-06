@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Copyright (C) 2007-2014 Avencall
+# Copyright 2014-2016 The Wazo Authors  (see the AUTHORS file)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -26,17 +26,21 @@ DEBIAN_URI = BASE_URI + 'debian/'
 
 class TestXivoDist(unittest.TestCase):
 
+    def setUp(self):
+        self.host = 'mirror.wazo.community'
+        self.path = None
+
     def test_given_prod_distribution_when_generate_sources_then_prod_debian_source(self):
         distribution = 'xivo-five'
 
-        sources = xivo_dist.generate_sources(distribution)
+        sources = xivo_dist.generate_sources(distribution, self.host, self.path)
 
         self._assert_sources(sources, DEBIAN_URI, distribution)
 
     def test_given_unnamed_distribution_when_generate_sources_then_archive_source(self):
         distribution = 'xivo-forever'
 
-        sources = xivo_dist.generate_sources(distribution)
+        sources = xivo_dist.generate_sources(distribution, self.host, self.path)
 
         self._assert_sources(sources, ARCHIVE_URI, distribution)
 
