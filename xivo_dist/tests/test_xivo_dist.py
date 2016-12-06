@@ -19,10 +19,6 @@ import textwrap
 import unittest
 from xivo_dist import xivo_dist
 
-BASE_URI = 'http://mirror.wazo.community/'
-ARCHIVE_URI = BASE_URI + 'archive/'
-DEBIAN_URI = BASE_URI + 'debian/'
-
 
 class TestXivoDist(unittest.TestCase):
 
@@ -35,14 +31,30 @@ class TestXivoDist(unittest.TestCase):
 
         sources = xivo_dist.generate_sources(distribution, self.host, self.path)
 
-        self._assert_sources(sources, DEBIAN_URI, distribution)
+        self._assert_sources(sources, 'http://mirror.wazo.community/debian/', distribution)
 
     def test_given_unnamed_distribution_when_generate_sources_then_archive_source(self):
         distribution = 'xivo-forever'
 
         sources = xivo_dist.generate_sources(distribution, self.host, self.path)
 
-        self._assert_sources(sources, ARCHIVE_URI, distribution)
+        self._assert_sources(sources, 'http://mirror.wazo.community/archive/', distribution)
+
+    def test_generate_sources_explicit_path(self):
+        self.path = '/foobar/'
+        distribution = 'xivo-five'
+
+        sources = xivo_dist.generate_sources(distribution, self.host, self.path)
+
+        self._assert_sources(sources, 'http://mirror.wazo.community/foobar/', distribution)
+
+    def test_generate_sources_explicit_host(self):
+        self.host = 'mirror.example.org'
+        distribution = 'xivo-five'
+
+        sources = xivo_dist.generate_sources(distribution, self.host, self.path)
+
+        self._assert_sources(sources, 'http://mirror.example.org/debian/', distribution)
 
     def test_given_named_distribution_when_distribution_is_archive_then_false(self):
         distribution = 'xivo-dev'
