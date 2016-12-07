@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# Copyright (C) 2014 Avencall
+# Copyright 2014-2016 The Wazo Authors  (see the AUTHORS file)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -18,26 +18,26 @@
 
 import argparse
 
-BASE_URI = 'http://mirror.wazo.community/'
-ARCHIVE_URI = BASE_URI + 'archive/'
-DEBIAN_URI = BASE_URI + 'debian/'
+DEFAULT_HOST = 'mirror.wazo.community'
 SOURCE_LIST_PATH = '/etc/apt/sources.list.d/xivo-dist.list'
 NAMED_DISTRIBUTIONS = ['xivo-five', 'xivo-dev', 'xivo-rc', 'wazo-dev', 'wazo-rc', 'phoenix']
 DEB_SOURCE_CONTENT = """
 # {distrib}
-deb {mirror_uri} {distrib} main
-# deb-src {mirror_uri} {distrib} main
+deb http://{host}{path} {distrib} main
+# deb-src http://{host}{path} {distrib} main
 """
 
 
 def main():
     args = parse_args()
-    distribution_sources = generate_sources(args.distribution)
+    distribution_sources = generate_sources(args.distribution, args.host, args.path)
     write_source_list(distribution_sources)
 
 
 def parse_args():
     parser = argparse.ArgumentParser('xivo-dist')
+    parser.add_argument('--host', default=DEFAULT_HOST)
+    parser.add_argument('--path')
     parser.add_argument('distribution', help='switch sources to given distribution')
 
     return parser.parse_args()
@@ -49,11 +49,14 @@ def write_source_list(distribution_sources):
     fh.close()
 
 
-def generate_sources(distribution):
-    is_archive = distribution_is_archive(distribution)
+def generate_sources(distribution, host, path):
+    if path is None:
+        if distribution_is_archive(distribution):
+            path = '/archive/'
+        else:
+            path = '/debian/'
 
-    mirror_uri = ARCHIVE_URI if is_archive else DEBIAN_URI
-    deb_source = DEB_SOURCE_CONTENT.format(mirror_uri=mirror_uri, distrib=distribution)
+    deb_source = DEB_SOURCE_CONTENT.format(host=host, path=path, distrib=distribution)
 
     return deb_source
 
