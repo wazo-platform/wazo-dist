@@ -1,4 +1,4 @@
 xivo-dist
 =========
 
-XiVO repository sources manager
+Wazo repository sources manager
