@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# Copyright 2014-2016 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2014-2017 The Wazo Authors  (see the AUTHORS file)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,7 +20,17 @@ import argparse
 
 DEFAULT_HOST = 'mirror.wazo.community'
 SOURCE_LIST_PATH = '/etc/apt/sources.list.d/xivo-dist.list'
-NAMED_DISTRIBUTIONS = ['xivo-five', 'xivo-dev', 'xivo-rc', 'wazo-dev', 'wazo-rc', 'phoenix']
+NAMED_DISTRIBUTIONS = [
+    'xivo-five',
+    'xivo-dev',
+    'xivo-rc',
+    'wazo-dev',
+    'wazo-rc',
+    'phoenix',
+    'wazo-dev-stretch',
+    'wazo-rc-stretch',
+    'phoenix-stretch',
+]
 DEB_SOURCE_CONTENT = """
 # {distrib}
 deb http://{host}{path} {distrib} main
