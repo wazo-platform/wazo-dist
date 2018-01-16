@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# Copyright (C) 2014 Avencall
+# Copyright 2014-2018 The Wazo Authors  (see the AUTHORS file)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -16,20 +16,20 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
-import fnmatch
-import os
-
 from setuptools import setup
 from setuptools import find_packages
 
-
 setup(
-    name='xivo-dist',
+    name='wazo-dist',
     version='1.0',
-    description='XiVO repository sources manager',
+    description='Wazo repository sources manager',
     author='Wazo Authors',
-    author_email='dev.wazo@gmail.com',
+    author_email='dev@wazo.community',
     url='http://wazo.community',
     packages=find_packages(),
-    scripts=['bin/xivo-dist'],
+    entry_points={
+        'console_scripts': [
+            'wazo-dist = xivo_dist.xivo_dist:main',
+        ]
+    }
 )
