@@ -16,16 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
-from setuptools import setup
-from setuptools import find_packages
+from xivo_dist.xivo_dist import main
 
-setup(
-    name='wazo-dist',
-    version='1.0',
-    description='Wazo repository sources manager',
-    author='Wazo Authors',
-    author_email='dev@wazo.community',
-    url='http://wazo.community',
-    packages=find_packages(),
-    scripts=['bin/wazo-dist'],
-)
+
+main()
