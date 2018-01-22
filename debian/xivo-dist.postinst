@@ -6,7 +6,7 @@ case "$1" in
     configure)
         previously_installed_version=$2
         if [ -z $previously_installed_version ] ; then
-            /usr/bin/xivo-dist phoenix
+            /usr/bin/xivo-dist phoenix-stretch
         fi
 
 	if dpkg --compare-versions "$previously_installed_version" "le-nl" "16.16~20161129.155728.5b12d5d"; then
