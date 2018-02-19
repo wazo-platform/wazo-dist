@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Copyright 2014-2016 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2014-2018 The Wazo Authors  (see the AUTHORS file)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -22,39 +22,14 @@ from xivo_dist import xivo_dist
 
 class TestXivoDist(unittest.TestCase):
 
-    def setUp(self):
-        self.host = 'mirror.wazo.community'
-        self.path = None
-
-    def test_given_prod_distribution_when_generate_sources_then_prod_debian_source(self):
+    def test_generate_sources(self):
+        host = 'mirror.example.org'
+        path = '/foobar/'
         distribution = 'xivo-five'
 
-        sources = xivo_dist.generate_sources(distribution, self.host, self.path)
+        sources = xivo_dist.generate_sources(distribution, host, path)
 
-        self._assert_sources(sources, 'http://mirror.wazo.community/debian/', distribution)
-
-    def test_given_unnamed_distribution_when_generate_sources_then_archive_source(self):
-        distribution = 'xivo-forever'
-
-        sources = xivo_dist.generate_sources(distribution, self.host, self.path)
-
-        self._assert_sources(sources, 'http://mirror.wazo.community/archive/', distribution)
-
-    def test_generate_sources_explicit_path(self):
-        self.path = '/foobar/'
-        distribution = 'xivo-five'
-
-        sources = xivo_dist.generate_sources(distribution, self.host, self.path)
-
-        self._assert_sources(sources, 'http://mirror.wazo.community/foobar/', distribution)
-
-    def test_generate_sources_explicit_host(self):
-        self.host = 'mirror.example.org'
-        distribution = 'xivo-five'
-
-        sources = xivo_dist.generate_sources(distribution, self.host, self.path)
-
-        self._assert_sources(sources, 'http://mirror.example.org/debian/', distribution)
+        self._assert_sources(sources, 'http://mirror.example.org/foobar/', distribution)
 
     def test_given_named_distribution_when_distribution_is_archive_then_false(self):
         distribution = 'xivo-dev'
@@ -69,6 +44,31 @@ class TestXivoDist(unittest.TestCase):
         is_archive = xivo_dist.distribution_is_archive(distribution)
 
         self.assertTrue(is_archive)
+
+    def test_given_main_repo_when_determine_path_then_debian(self):
+        path = xivo_dist.determine_path('some-distro', '/some-path/', main_repo=True, archive_repo=False)
+
+        self.assertEqual(path, '/debian/')
+
+    def test_given_archive_repo_when_determine_path_then_archive(self):
+        path = xivo_dist.determine_path('some-distro', '/some-path/', main_repo=False, archive_repo=True)
+
+        self.assertEqual(path, '/archive/')
+
+    def test_given_custom_path_when_determine_path_then_custom(self):
+        path = xivo_dist.determine_path('some-distro', '/some-path/', main_repo=False, archive_repo=False)
+
+        self.assertEqual(path, '/some-path/')
+
+    def test_given_named_distribution_when_determine_path_then_debian(self):
+        path = xivo_dist.determine_path('phoenix', custom_path=None, main_repo=False, archive_repo=False)
+
+        self.assertEqual(path, '/debian/')
+
+    def test_given_unnamed_distribution_when_determine_path_then_archive(self):
+        path = xivo_dist.determine_path('some-distro', custom_path=None, main_repo=False, archive_repo=False)
+
+        self.assertEqual(path, '/archive/')
 
     def _assert_sources(self, sources, mirror_uri, distribution):
         expected_sources = textwrap.dedent("""
