@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# Copyright 2014-2018 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2014-2019 The Wazo Authors  (see the AUTHORS file)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -30,6 +30,7 @@ NAMED_DISTRIBUTIONS = [
     'wazo-dev-stretch',
     'wazo-rc-stretch',
     'phoenix-stretch',
+    'pelican-stretch',
 ]
 DEB_SOURCE_CONTENT = """
 # {distrib}
