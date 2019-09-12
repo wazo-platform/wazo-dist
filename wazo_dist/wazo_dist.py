@@ -19,7 +19,7 @@
 import argparse
 
 DEFAULT_HOST = 'mirror.wazo.community'
-SOURCE_LIST_PATH = '/etc/apt/sources.list.d/xivo-dist.list'
+SOURCE_LIST_PATH = '/etc/apt/sources.list.d/wazo-dist.list'
 NAMED_DISTRIBUTIONS = [
     'xivo-five',
     'xivo-dev',
@@ -47,7 +47,7 @@ def main():
 
 
 def parse_args():
-    parser = argparse.ArgumentParser('xivo-dist')
+    parser = argparse.ArgumentParser('wazo-dist')
     parser.add_argument('--host', default=DEFAULT_HOST)
 
     group = parser.add_mutually_exclusive_group()

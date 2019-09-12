@@ -1,4 +1,4 @@
-Source: xivo-dist
+Source: wazo-dist
 Section: python
 Priority: extra
 Maintainer: Wazo Maintainers <dev.wazo@gmail.com>
@@ -6,9 +6,12 @@ Build-Depends: debhelper (>= 9), dh-python, python-all (>= 2.6), python-setuptoo
 Standards-Version: 3.9.6
 X-Python-Version: >= 2.6
 
-Package: xivo-dist
+Package: wazo-dist
 Architecture: all
 Depends: python (>= 2.6), python (<< 2.8), ${misc:Depends}
+Replaces: xivo-dist
+Conflicts: xivo-dist
+Provides: xivo-dist
 Description: Wazo repository sources manager
  Wazo is a system based on a powerful IPBX, to bring an easy to
  install solution for telephony and related services.

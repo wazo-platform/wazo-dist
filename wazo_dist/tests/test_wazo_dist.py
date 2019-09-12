@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Copyright 2014-2018 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2014-2019 The Wazo Authors  (see the AUTHORS file)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 
 import textwrap
 import unittest
-from xivo_dist import xivo_dist
+from wazo_dist import wazo_dist
 
 
 class TestXivoDist(unittest.TestCase):
@@ -27,46 +27,46 @@ class TestXivoDist(unittest.TestCase):
         path = '/foobar/'
         distribution = 'xivo-five'
 
-        sources = xivo_dist.generate_sources(distribution, host, path)
+        sources = wazo_dist.generate_sources(distribution, host, path)
 
         self._assert_sources(sources, 'http://mirror.example.org/foobar/', distribution)
 
     def test_given_named_distribution_when_distribution_is_archive_then_false(self):
         distribution = 'xivo-dev'
 
-        is_archive = xivo_dist.distribution_is_archive(distribution)
+        is_archive = wazo_dist.distribution_is_archive(distribution)
 
         self.assertFalse(is_archive)
 
     def test_given_unnamed_distribution_when_distribution_is_archive_then_true(self):
         distribution = 'xivo-ftw'
 
-        is_archive = xivo_dist.distribution_is_archive(distribution)
+        is_archive = wazo_dist.distribution_is_archive(distribution)
 
         self.assertTrue(is_archive)
 
     def test_given_main_repo_when_determine_path_then_debian(self):
-        path = xivo_dist.determine_path('some-distro', '/some-path/', main_repo=True, archive_repo=False)
+        path = wazo_dist.determine_path('some-distro', '/some-path/', main_repo=True, archive_repo=False)
 
         self.assertEqual(path, '/debian/')
 
     def test_given_archive_repo_when_determine_path_then_archive(self):
-        path = xivo_dist.determine_path('some-distro', '/some-path/', main_repo=False, archive_repo=True)
+        path = wazo_dist.determine_path('some-distro', '/some-path/', main_repo=False, archive_repo=True)
 
         self.assertEqual(path, '/archive/')
 
     def test_given_custom_path_when_determine_path_then_custom(self):
-        path = xivo_dist.determine_path('some-distro', '/some-path/', main_repo=False, archive_repo=False)
+        path = wazo_dist.determine_path('some-distro', '/some-path/', main_repo=False, archive_repo=False)
 
         self.assertEqual(path, '/some-path/')
 
     def test_given_named_distribution_when_determine_path_then_debian(self):
-        path = xivo_dist.determine_path('phoenix', custom_path=None, main_repo=False, archive_repo=False)
+        path = wazo_dist.determine_path('phoenix', custom_path=None, main_repo=False, archive_repo=False)
 
         self.assertEqual(path, '/debian/')
 
     def test_given_unnamed_distribution_when_determine_path_then_archive(self):
-        path = xivo_dist.determine_path('some-distro', custom_path=None, main_repo=False, archive_repo=False)
+        path = wazo_dist.determine_path('some-distro', custom_path=None, main_repo=False, archive_repo=False)
 
         self.assertEqual(path, '/archive/')
 

@@ -1,3 +1,9 @@
+wazo-dist (1.0) wazo-dev-buster; urgency=medium
+
+  * Rename to wazo-dist
+
+ -- Wazo Maintainers <dev@wazo.community>  Thu, 12 Sep 2019 11:19:10 -0400
+
 xivo-dist (0.1) stable; urgency=low
 
   * Initial release.
