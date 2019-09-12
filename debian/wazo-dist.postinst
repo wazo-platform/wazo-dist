@@ -5,7 +5,7 @@ set -e
 case "$1" in
     configure)
         previously_installed_version=$2
-        if [ -z $previously_installed_version ] ; then
+        if [ -z $previously_installed_version -a ! -f /etc/apt/sources.list.d/wazo-dist.list ] ; then
             /usr/bin/wazo-dist -m pelican-buster
         fi
     ;;
