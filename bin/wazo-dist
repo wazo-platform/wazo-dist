@@ -1,7 +1,0 @@
-#!/usr/bin/env python
-# Copyright 2014-2019 The Wazo Authors  (see the AUTHORS file)
-# SPDX-License-Identifier: GPL-3.0-or-later
-
-from wazo_dist.wazo_dist import main
-
-main()
