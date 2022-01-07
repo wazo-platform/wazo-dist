@@ -1,2 +1,5 @@
 *.pyc
 .tox
+.coverage
+coverage.xml
+unit-tests.xml

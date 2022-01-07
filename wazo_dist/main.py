@@ -1,6 +1,4 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-# Copyright 2014-2019 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2014-2022 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import argparse
@@ -28,7 +26,9 @@ deb http://{host}{path} {distrib} main
 
 def main():
     args = parse_args()
-    path = determine_path(args.distribution, args.path, args.archive_repo, args.main_repo)
+    path = determine_path(
+        args.distribution, args.path, args.archive_repo, args.main_repo
+    )
     distribution_sources = generate_sources(args.distribution, args.host, path)
     write_source_list(distribution_sources)
 
@@ -39,8 +39,12 @@ def parse_args():
 
     group = parser.add_mutually_exclusive_group()
     parser.add_argument('--path')
-    group.add_argument('-a', '--archive-repo', action='store_true', help='Use archive repository')
-    group.add_argument('-m', '--main-repo', action='store_true', help='Use main repository')
+    group.add_argument(
+        '-a', '--archive-repo', action='store_true', help='Use archive repository'
+    )
+    group.add_argument(
+        '-m', '--main-repo', action='store_true', help='Use main repository'
+    )
 
     parser.add_argument('distribution', help='Switch sources to given distribution')
 
