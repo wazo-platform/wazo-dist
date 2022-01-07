@@ -2,4 +2,4 @@
     templates:
       - wazo-tox-linters
       - debian-packaging-template
-      - wazo-tox-py27
+      - wazo-tox-py37
