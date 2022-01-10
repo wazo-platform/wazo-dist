@@ -10,7 +10,8 @@ Package: wazo-dist
 Architecture: all
 Depends:
   ${python3:Depends},
-  ${misc:Depends}
+  ${misc:Depends},
+  python3-setuptools
 Replaces: xivo-dist
 Conflicts: xivo-dist
 Provides: xivo-dist
