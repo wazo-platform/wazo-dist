@@ -16,6 +16,9 @@ NAMED_DISTRIBUTIONS = [
     'wazo-rc-stretch',
     'phoenix-stretch',
     'pelican-stretch',
+    'wazo-dev-buster',
+    'wazo-rc-buster',
+    'pelican-buster',
 ]
 DEB_SOURCE_CONTENT = """
 # {distrib}
