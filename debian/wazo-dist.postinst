@@ -2,26 +2,11 @@
 
 set -e
 
-XIVO_DIST_PACKAGE_PATH="/usr/lib/python2.7/dist-packages/xivo_dist"
-OLD_WAZO_DIST_PACKAGE_PATH="/usr/lib/python2.7/dist-packages/wazo_dist"
-
 case "$1" in
     configure)
         previously_installed_version=$2
         if [ -z "$previously_installed_version" -a ! -f /etc/apt/sources.list.d/wazo-dist.list ] ; then
             /usr/bin/wazo-dist -m pelican-buster
-        fi
-
-        # The old xivo-dist package did not get generated with dh_python properly
-        # the old pyc files have been left on the filysystem preventing the old
-        # package from being removed
-        if [ -e "${XIVO_DIST_PACKAGE_PATH}" ]; then
-            find "${XIVO_DIST_PACKAGE_PATH}" -name "*.pyc" -delete
-            rmdir "${XIVO_DIST_PACKAGE_PATH}"
-        fi
-        if [ -e "${OLD_WAZO_DIST_PACKAGE_PATH}" ]; then
-            find "${OLD_WAZO_DIST_PACKAGE_PATH}" -name "*.pyc" -delete
-            rmdir "${OLD_WAZO_DIST_PACKAGE_PATH}"
         fi
     ;;
 
