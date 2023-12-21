@@ -1,8 +1,9 @@
-# Copyright 2014-2021 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2014-2023 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import textwrap
 import unittest
+
 from wazo_dist import main as wazo_dist
 
 
